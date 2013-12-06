@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PAWS:: Core" default="dist" basedir=".">
+	<description> 
+		Build file for the PAWS core library
+	</description>
+
+	<!-- Folder variables -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="paws-core-jar" location="paws-core.jar"/>
+
+	<target name="clean" description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete file="${paws-core-jar}"/>
+	</target>	
+	
+	<target name="init" depends="clean">
+		<!-- Create the time stamp <tstamp/> -->
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source " >
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" debug="on"/>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the jar file" >
+		<jar destfile="${paws-core-jar}" basedir="${build}"/>
+		<!-- copy to PAWS-COPE -->
+		<copy todir="../paws_cope/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to PAWS-KT 2-->
+		<copy todir="../kt2/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to PAWS-CBUM -->
+		<copy todir="../cbum/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to PAWS-D-CBUM
+		<copy todir="../d-cbum/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy> -->
+		<!-- copy to NAVEX -->
+		<copy todir="../navex/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to D-NAVEX
+		<copy todir="../d-navex/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy> -->
+		<!-- copy to D-FLOODER
+		<copy todir="../d-flooder/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy> -->
+		<!-- copy to WEBEX -->
+		<copy todir="../webex/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to ADAPT2 Directory -->
+		<copy todir="../adapt2.directory/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to ADAPT2 PService -->
+		<copy todir="../adapt2.pservice/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>
+		<!-- copy to ADAPT2 NetEx
+		<copy todir="../netex/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy>  -->
+		<!-- copy to ADAPT2 AJAX
+		<copy todir="../adapt2.ajax/web/WEB-INF/lib/">
+			<fileset file="${paws-core-jar}"/>
+		</copy> -->
+	</target>
+
+
+</project>
